@@ -10,12 +10,27 @@
     "type": "git",
     "url": "https://github.com/edenpessach/cloudify-rest-mock.git"
   },
-  "license":[{
-    "type": "Apache-2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0"
-  }],
+  "license": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/edenpessach/cloudify-rest-mock/issues"
   },
-  "homepage": "https://github.com/edenpessach/cloudify-rest-mock"
+  "homepage": "https://github.com/edenpessach/cloudify-rest-mock",
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-http-proxy": "^0.6.0",
+    "fs-extra": "^0.26.0",
+    "grunt": "^0.4.5",
+    "lodash": "^3.10.1",
+    "log4js": "^0.6.27"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-jscs": "^2.3.0",
+    "load-grunt-tasks": "^3.3.0"
+  }
 }
