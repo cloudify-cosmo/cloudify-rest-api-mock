@@ -1,0 +1,21 @@
+{
+  "name": "cloudify-rest-mock",
+  "version": "0.0.1",
+  "description": "Cloudify rest mock for development of a Cloudify UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edenpessach/cloudify-rest-mock.git"
+  },
+  "license":[{
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  }],
+  "bugs": {
+    "url": "https://github.com/edenpessach/cloudify-rest-mock/issues"
+  },
+  "homepage": "https://github.com/edenpessach/cloudify-rest-mock"
+}
