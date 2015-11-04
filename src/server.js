@@ -7,43 +7,45 @@ var app = express();
 var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
+var url = require('url');
+
+var endpointString = process.env.CFY_ENDPOINT || 'http://10.10.1.10/'; // no need for /api/v2/, this will come as part of the backend's request from meConf.js
+if (endpointString[endpointString.length - 1] !== '/') {
+    endpointString = endpointString + '/'; // must end with slash;
+}
+var endpoint = url.parse(endpointString);
+logger.info('expecting to find cloudify rest at [', endpoint.href, ']');
+
+var mocksDir = path.join(__dirname, '../data','/');
+logger.info('expecting mocks json files to be in [',mocksDir,']');
+
 
 app.use(function findFile(req, res, next) {
-    var withQuery = path.join(__dirname, '../data', req.url.substring(1));
-    var withoutQuery = path.join(__dirname, '../data', req.path.substring(1));
 
+    var reqUrl = req.url.replace('/backend/cloudify-api/','');
     var options = [
-        withQuery,
-        withQuery + '.json',
-        withoutQuery,
-        withoutQuery + '.json'
+        mocksDir + reqUrl,
+        mocksDir + reqUrl + '.json'
     ];
 
-    var file = _.find(options, function (o) {
-        return fs.existsSync(o) && fs.lstatSync(o).isFile();
+    var file = _.find(options, function (option) {
+        return fs.existsSync(option) && fs.lstatSync(option).isFile();
     });
 
-    logger.info('file is', file);
-
     if (!!file) {
+        logger.info('~~~!!! found mock file: ', file, '!!!~~~');
         res.send(JSON.parse(fs.readFileSync(file)));
     } else {
         next();
     }
 });
 
-var endpointString = process.env.CFY_ENDPOINT || 'http://10.10.1.10/'; // no need for /api/v2/, this will come as part of the backend's request from meConf.js
-if (endpointString[endpointString.length - 1] !== '/') {
-    endpointString = endpointString + '/'; // must end with slash;
-}
-var endpoint = require('url').parse(endpointString);
-logger.info('expecting to find cloudify rest at [', endpoint.href, ']');
 app.use(function proxyRequestToCloudify(req, res, next) {
     try {
         proxy(endpoint.host, {
             forwardPath: function (req) {
-                var fPath = require('url').resolve(endpoint.path, require('url').parse(req.url).path.substring(1));
-                logger.info('this is forward path', fPath);
+                var fPath = url.resolve(endpoint.path, url.parse(req.url).path.substring(1));
+                logger.info('forwarding request to', fPath);
                 return fPath;
             }
         })(req, res, next);
@@ -62,5 +64,5 @@ var server = app.listen(3333, function () {
     var host = server.address().address;
     var port = server.address().port;
 
-    logger.info('Example app listening at http://%s:%s', host, port);
+    logger.info('app is listening at http://%s:%s', host, port);
 });
