@@ -2,7 +2,7 @@
     "metadata": {
         "pagination": {
             "total": 500,
-            "page_size": 50,
+            "page_size": 51,
             "offset": 50
         }
     },
