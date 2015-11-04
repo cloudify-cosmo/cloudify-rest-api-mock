@@ -1,4 +1,11 @@
 {
+    "metadata": {
+        "pagination": {
+            "total": 500,
+            "page_size": 50,
+            "offset": 50
+        }
+    },
     "items": [
            {
               "event_type":"workflow_stage",
@@ -1151,10 +1158,5 @@
               },
               "type":"cloudify_event"
            }
-        ],
-        u'metadata': 
-            {u'pagination': 
-                {u'total': 1, 
-                u'page_size': u'3', 
-                u'offset': u'9'}}}
+        ]
 }
