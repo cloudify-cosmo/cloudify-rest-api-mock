@@ -21,8 +21,18 @@ logger.info('expecting mocks json files to be in [',mocksDir,']');
 
 
 app.use(function findFile(req, res, next) {
-
+    //slicing off backend prefix
     var reqUrl = req.url.replace('/backend/cloudify-api/','');
+    //slicing off query parameters
+    var parametersIndex = reqUrl.indexOf('?');
+    if(parametersIndex !== -1) {
+        reqUrl = reqUrl.substr(0, parametersIndex);
+    }
+    //slicing off slash if it starts with
+    if(reqUrl[0] === '/'){
+        reqUrl = reqUrl.slice(1);
+    }
+
     var options = [
         mocksDir + reqUrl,
         mocksDir + reqUrl + '.json'
