@@ -1,0 +1,113 @@
+{
+    "items": [
+        {
+            "inputs": {
+                "agent_user": "vagrant",
+                "host_ip": "10.10.1.10",
+                "agent_private_key_path": "/home/vagrant/.ssh/id_rsa"
+            },
+            "blueprint_id": "blueprint-from-mock",
+            "outputs": {
+                "endpoint": {
+                    "description": "Web application endpoint",
+                    "value": {
+                        "ip_address": "10.10.1.10",
+                        "port": 8080
+                    }
+                }
+            },
+            "created_at": "2016-02-01 17:14:47.378309",
+            "updated_at": "2016-02-01 17:14:47.378309",
+            "workflows": [
+                {
+                    "created_at": null,
+                    "name": "scale",
+                    "parameters": {
+                        "node_id": {
+                            "description": "Which node (not node instance) to scale"
+                        },
+                        "scale_compute": {
+                            "default": true,
+                            "description": "If node is contained (transitively) within a compute node and this property is 'true', operate on compute node instead of 'node_id'\n"
+                        },
+                        "delta": {
+                            "default": 1,
+                            "description": "How many nodes should be added/removed. A positive number denotes increase of instances. A negative number denotes decrease of instances.\n"
+                        }
+                    }
+                },
+                {
+                    "created_at": null,
+                    "name": "heal",
+                    "parameters": {
+                        "diagnose_value": {
+                            "default": "Not provided",
+                            "description": "Diagnosed reason of failure"
+                        },
+                        "node_instance_id": {
+                            "description": "Which node instance has failed"
+                        }
+                    }
+                },
+                {
+                    "created_at": null,
+                    "name": "execute_operation",
+                    "parameters": {
+                        "operation_kwargs": {
+                            "default": {}
+                        },
+                        "node_ids": {
+                            "default": []
+                        },
+                        "node_instance_ids": {
+                            "default": []
+                        },
+                        "run_by_dependency_order": {
+                            "default": false
+                        },
+                        "operation": {},
+                        "allow_kwargs_override": {
+                            "default": null
+                        },
+                        "type_names": {
+                            "default": []
+                        }
+                    }
+                },
+                {
+                    "created_at": null,
+                    "name": "install",
+                    "parameters": {}
+                },
+                {
+                    "created_at": null,
+                    "name": "install_new_agents",
+                    "parameters": {
+                        "node_instance_ids": {
+                            "default": []
+                        },
+                        "install_agent_timeout": {
+                            "default": 300
+                        },
+                        "node_ids": {
+                            "default": []
+                        }
+                    }
+                },
+                {
+                    "created_at": null,
+                    "name": "uninstall",
+                    "parameters": {}
+                }
+            ],
+            "id": "deployment-from-mock"
+        }
+    ],
+    "metadata": {
+        "pagination": {
+            "total": 1,
+            "offset": 0,
+            "size": 10000
+        }
+    }
+}

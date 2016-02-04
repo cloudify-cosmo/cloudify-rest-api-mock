@@ -1,0 +1,17 @@
+{
+    "items": [
+        {
+            "updated_at": "2016-02-01 17:08:23.642637",
+            "created_at": "2016-02-01 17:08:23.642637",
+            "description": "This Blueprint installs the nodecellar application on an existing host.\n",
+            "id": "blueprint-from-mock"
+        }
+    ],
+    "metadata": {
+        "pagination": {
+            "total": 1,
+            "offset": 0,
+            "size": 10000
+        }
+    }
+}
